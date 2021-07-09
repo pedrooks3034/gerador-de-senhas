@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="javascript.png">
+    <title>Gerador de senhas</title>
+</head>
+<body>
+    <div class="box">
+        <div class="bodybox">
+            <div class="insercao" id='campo'>
+                <label for='pswLeght'>Quantidade de Caracteres:</label>
+                <br>
+                <input id='pswLeght' type='number' value="8" min='8' max="24">
+                <br>
+                <label for='pswQtd'>Quantidade de Senhas:</label>
+                <br>
+                <input id='pswQtd' type='number' value="1" min='1' max="16">
+                <br>
+            </div>
+
+            <div class="insercao" id='check'>
+                <label><input id='number' type='checkbox'>Incluir Números</label>
+                <br>
+                <label><input id='upperCase' type='checkbox'>Incluir Letras Maiúsculas</label>
+                <br>
+                <label><input id='special' type='checkbox'>Incluir Caracteres Especiais</label>
+            </div>
+
+            <div class="insercao">
+                <button id="gerarone" onclick="pswGenerate()">Gerar</button>
+                <button id="gerartwo" onclick="clean()">Limpar</button>
+            </div>
+
+            <div id='resultado'>
+                <textarea id='answer' rows='6' style= 'width:370px'>Gerar Senha</textarea>
+        </div>
+    </div>
+
+    <!--****SCRIPT  COMEÇA AQUI*****-->
+    <script>
+
+        function pswGenerate(){
+            let characters =  'abcdefghijklmnopqrstuvwxyz'
+            let password = ' '
+            let leght = document.getElementById('pswLeght').value
+            let qtd = document.getElementById('pswQtd').value
+            let spc = document.getElementById('special').checked
+            let numb = document.getElementById('number').checked
+            let upp = document.getElementById('upperCase').checked
+
+
+            if(spc == true){characters += '!@#$%¨&*()'}
+            if(numb == true){characters += '1234567890'}
+            if(upp == true){characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+
+            let charactersLength = characters.length
+
+            for(let y = 1; y <= qtd; y++){
+
+                let passwordN = ''
+
+                for(let x = 1; x <= leght; x++){
+                    passwordN = passwordN + characters.charAt(Math.floor(Math.random() * charactersLength))
+                }
+                password = passwordN + '  ' + password
+            }
+
+            document.getElementById('answer').value = password
+
+        }
+        function clean(){
+            document.getElementById('answer').value = ' '
+        }
+    </script>
+</body>
+</html>
